@@ -3,45 +3,27 @@ package com.fabiosanchez.interrapidisimotest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.fabiosanchez.interrapidisimotest.ui.theme.InterRapidisimoTestTheme
+import androidx.navigation.compose.rememberNavController
+import com.fabiosanchez.interrapidisimotest.navigation.AppNavigation
+import com.fabiosanchez.interrapidisimotest.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+// MainActivity es la actividad principal de la aplicacion
+// Aquí se configura Jetpack Compose como sistema de UI, y se inicia el sistema de navegacion
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        // Inicia Jetpack Compose con el tema personalizado de la app
         setContent {
-            InterRapidisimoTestTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            AppTheme {
+                // Inicia la navegación con el controlador de navegación
+                AppNavigation(
+                    navController = rememberNavController(),
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    InterRapidisimoTestTheme {
-        Greeting("Android")
     }
 }
