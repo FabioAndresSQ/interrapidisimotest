@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fabiosanchez.interrapidisimotest.ui.auth.LoginScreen
 import com.fabiosanchez.interrapidisimotest.ui.home.HomeScreen
+import com.fabiosanchez.interrapidisimotest.ui.localidad.LocalidadScreen
 import com.fabiosanchez.interrapidisimotest.ui.table.TablaScreen
 import kotlinx.serialization.Serializable
 
@@ -28,7 +29,7 @@ fun AppNavigation(navController: NavHostController){
             TablaScreen(navController)
         }
         composable<Localidad> {
-            //LocalidadScreen(navController)
+            LocalidadScreen(navController)
         }
 
 

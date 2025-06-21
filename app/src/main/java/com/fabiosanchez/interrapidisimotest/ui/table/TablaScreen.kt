@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -68,7 +70,7 @@ fun TablaScreen(navController: NavHostController, viewModel: TablaViewModel = hi
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(32.dp))
                         Text(text = "Listado de Tablas", fontWeight = FontWeight.Bold, fontSize = 20.sp)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(text = "Toca una tabla para ver sus detalles")
@@ -105,6 +107,13 @@ fun TableItemCard(table: TablaEntity?) {
         onClick = {
             showDetails.value = true
         },
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        ),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Column (
             modifier = Modifier.padding(16.dp).fillMaxSize()
@@ -134,7 +143,10 @@ fun TableDetailsDialog(table: TablaEntity?, onDismissRequest: () -> Unit) {
         }
     ){
         Card (
-            modifier = Modifier.fillMaxHeight(0.9f)
+            modifier = Modifier.fillMaxHeight(0.9f),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White,
+            ),
         ){
             val scrollState = rememberScrollState()
             Column (

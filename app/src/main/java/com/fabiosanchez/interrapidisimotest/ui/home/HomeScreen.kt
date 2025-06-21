@@ -129,7 +129,7 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
 @Composable
 fun InfoRowHome(label: String, value: String?) {
     Row {
-        Text("$label :", fontWeight = FontWeight.Bold)
+        Text("$label: ", fontWeight = FontWeight.Bold)
         Text(value ?: "No disponible")
     }
 }

@@ -31,10 +31,10 @@ class LoginViewModel @Inject constructor(
     val loginState: StateFlow<LoginState> = _loginState
 
     // Campos del formulario de inicio de sesión
-    private val _user = MutableStateFlow<String>("cGFtLm1lcmVkeTIx\\n")
+    private val _user = MutableStateFlow<String>("cGFtLm1lcmVkeTIx")
     val user: StateFlow<String> = _user
 
-    private val _password = MutableStateFlow<String>("SW50ZXIyMDIx\\n")
+    private val _password = MutableStateFlow<String>("SW50ZXIyMDIx")
     val password: StateFlow<String> = _password
 
     // Mensaje de validación de versión

@@ -113,7 +113,7 @@ fun LoginView(navController: NavHostController, viewModel: LoginViewModel){
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next
             ),
-            supportingText = {Text(text = "Test User: cGFtLm1lcmVkeTIx")}
+            supportingText = {Text(text = "Test User: cGFtLm1lcmVkeTIx - Agrega \\n para error")}
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -130,7 +130,7 @@ fun LoginView(navController: NavHostController, viewModel: LoginViewModel){
                 imeAction = ImeAction.Done
             ),
             visualTransformation = PasswordVisualTransformation(),
-            supportingText = {Text(text = "Test Password: SW50ZXIyMDIx")}
+            supportingText = {Text(text = "Test Password: SW50ZXIyMDIx - Agrega \\n para error")}
         )
 
         Spacer(modifier = Modifier.height(16.dp))
