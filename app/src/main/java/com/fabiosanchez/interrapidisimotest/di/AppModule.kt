@@ -3,10 +3,13 @@ package com.fabiosanchez.interrapidisimotest.di
 import android.app.Application
 import androidx.room.Room
 import com.fabiosanchez.interrapidisimotest.data.local.AppDatabase
+import com.fabiosanchez.interrapidisimotest.data.local.dao.TablaDao
 import com.fabiosanchez.interrapidisimotest.data.local.dao.UserDao
 import com.fabiosanchez.interrapidisimotest.data.remote.AuthApi
+import com.fabiosanchez.interrapidisimotest.data.remote.TablasApi
 import com.fabiosanchez.interrapidisimotest.data.remote.VersionApi
 import com.fabiosanchez.interrapidisimotest.data.repository.AuthRepositoryImpl
+import com.fabiosanchez.interrapidisimotest.data.repository.TablaRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,11 +60,34 @@ object AppModule {
             appContext,
             AppDatabase::class.java,
             "app_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     // Provee el DAO para acceder a la tabla de usuarios
     @Provides
     @Singleton
     fun provideUserDao(db: AppDatabase): UserDao = db.userDao()
+
+    // Provee la implementación de la API para obtener las tablas
+    @Provides
+    @Singleton
+    fun provideTablasApi(retrofit: Retrofit) : TablasApi {
+        return retrofit.create(TablasApi::class.java)
+    }
+
+    // Provee el repositorio de tablas
+    @Provides
+    @Singleton
+    fun provideTablasRepository(tablasApi: TablasApi) : TablaRepositoryImpl {
+        return TablaRepositoryImpl(tablasApi)
+    }
+
+    // Provee el DAO para acceder a la tabla de tablas
+    @Provides
+    @Singleton
+    fun provideTablaDao(db: AppDatabase): TablaDao = db.tablaDao()
+
+
 }

@@ -35,15 +35,18 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
     val homeState by viewModel.homeState.collectAsState()
     val user by viewModel.user.collectAsState()
 
+    // Cargar usuario al iniciar la pantalla
     LaunchedEffect(Unit) {
         viewModel.getUser()
     }
 
+    // Mostrar indicador de carga si esta cargando
     if (homeState is HomeState.Loading) {
         Column (modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             CircularProgressIndicator()
         }
     } else {
+        // Contenido principal si hay usuario activo
         if (user != null) {
             Column (
                 modifier = Modifier.fillMaxSize(),
@@ -54,27 +57,15 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-                Row {
-                    Text(text = "Nombre:", fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = user?.name ?: "Nombre no disponible")
-                }
+                InfoRowHome("Nombre", user?.name)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Row {
-                    Text(text = "Identificacion:", fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = user?.identification ?: "Identificacion no disponible")
-                }
+                InfoRowHome("Identificacion", user?.identification)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Row {
-                    Text(text = "Usuario:", fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = user?.user ?: "Usuario no disponible")
-                }
+                InfoRowHome("Usuario", user?.user)
 
                 Spacer(modifier = Modifier.height(32.dp))
 
@@ -112,6 +103,7 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
                 }
             }
         } else {
+            // Vista alternativa si no hay usuario (No deberia pasar pero igual cubrimos el caso)
             Column (
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
@@ -131,6 +123,13 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
             }
         }
     }
+}
 
-
+// Componente auxiliar para mostrar filas de texto y evitar repetitividad
+@Composable
+fun InfoRowHome(label: String, value: String?) {
+    Row {
+        Text("$label :", fontWeight = FontWeight.Bold)
+        Text(value ?: "No disponible")
+    }
 }

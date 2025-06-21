@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fabiosanchez.interrapidisimotest.ui.auth.LoginScreen
 import com.fabiosanchez.interrapidisimotest.ui.home.HomeScreen
+import com.fabiosanchez.interrapidisimotest.ui.table.TablaScreen
 import kotlinx.serialization.Serializable
 
 // Composable que define la navegación principal de la aplicación
@@ -24,7 +25,7 @@ fun AppNavigation(navController: NavHostController){
             HomeScreen(navController)
         }
         composable<Tablas> {
-            //TablasScreen(navController)
+            TablaScreen(navController)
         }
         composable<Localidad> {
             //LocalidadScreen(navController)
